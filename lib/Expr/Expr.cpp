@@ -9,6 +9,7 @@
 
 #include "klee/Expr.h"
 #include "klee/Config/Version.h"
+#include "llvm/ADT/StringExtras.h"
 
 #if LLVM_VERSION_CODE >= LLVM_VERSION(3, 1)
 #include "llvm/ADT/Hashing.h"
@@ -348,7 +349,7 @@ void ConstantExpr::toMemory(void *address) {
 }
 
 void ConstantExpr::toString(std::string &Res, unsigned radix) const {
-  Res = value.toString(radix, false);
+  Res = llvm::toString(value, radix, false);
 }
 
 ref<ConstantExpr> ConstantExpr::Concat(const ref<ConstantExpr> &RHS) {
