@@ -15,6 +15,7 @@
 #endif
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/ADT/StringExtras.h"
 // FIXME: We shouldn't need this once fast constant support moves into
 // Core. If we need to do arithmetic, we probably want to use APInt.
 #include "klee/Internal/Support/IntEvaluation.h"
@@ -348,7 +349,7 @@ void ConstantExpr::toMemory(void *address) {
 }
 
 void ConstantExpr::toString(std::string &Res, unsigned radix) const {
-  Res = value.toString(radix, false);
+  Res = llvm::toString(value, radix, false);
 }
 
 ref<ConstantExpr> ConstantExpr::Concat(const ref<ConstantExpr> &RHS) {
